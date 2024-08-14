@@ -172,7 +172,7 @@ function Auth({registerFor}) {
       
             <Form.Group className="mb-4 w-75" controlId="formBasicPassword">
               <Form.Label className='text-light'>Password</Form.Label>
-              <Form.Control name='upswd' type="text" placeholder="Password" value={userDetails.password} onChange={(e)=>validateInput(e)} />
+              <Form.Control name='upswd' type="password" placeholder="Password" value={userDetails.password} onChange={(e)=>validateInput(e)} />
               {!isPassword && !register &&<span className='text-danger ms-2'>*Invalid Input</span>}
 
             </Form.Group>
