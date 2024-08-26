@@ -124,7 +124,7 @@ function SchoolList() {
       setSchool({...school,schoolImage:preview})
       console.log(school.schoolImage);
     }
-  },[url,searchkey])
+  },[url,searchkey,schools])
   return (
     <>
       <div className='d-flex align-items-center justify-content-center flex-column'>
@@ -169,7 +169,6 @@ function SchoolList() {
           
         </Table>
       </TableContainer>
-      <ToastContainer theme='colored'  position='top-center' autoClose={2000} />
   
       </div>
       <Modal show={show} onHide={handleClose} style={{width:''}}>
@@ -294,6 +293,8 @@ function SchoolList() {
           </Button>
         </Modal.Footer>
       </Modal>
+      <ToastContainer theme='colored'  position='top-center' autoClose={2000} />
+
    
     </>
   )

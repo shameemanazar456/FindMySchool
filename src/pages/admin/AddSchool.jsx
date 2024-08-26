@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addSchoolApi, updateMoreSchoolDetailsApi, updateSchoolDetailsApi } from '../../services/allApi'
 import Modal from 'react-bootstrap/Modal';
-import AddSchoolSecond from '../../components/admincomponents/AddSchoolSecond'
 
 
 function AddSchool() {
@@ -37,14 +36,7 @@ function AddSchool() {
     TotalRating:""
   })
 
-  const [moreSchoolDetail, setMoreSchoolDetails] = useState({
-    vision:"",
-    mission:"",
-    principal:"",
-    imgPrincipal:"",
-    vicePrincipal:"",
-    imgVicePrincipal:""
-  })
+ 
 
   const [token, setToken]=useState("")
   const [preview,setPreview]=useState("")
@@ -64,6 +56,7 @@ function AddSchool() {
   const handleClose = () => {
 
     setShow(false);
+    navigate('/home-admin')
   }
   const handleShow = () => setShow(true);
 
@@ -80,6 +73,7 @@ function AddSchool() {
     schoolWebsite:''
     })
     const [preview, setPreview] = useState("")
+    navigate('/home-admin')
 
   }
 
@@ -182,62 +176,7 @@ function AddSchool() {
     }
 
   }
-  const UpdateMoreData = async (e)=>{
-    e.preventDefault()
-    const { vision, mission, imgPrincipal,principal, imgVicePrincipal,vicePrincipal}= moreSchoolDetail
-    if(!vision || !mission || !imgPrincipal || !principal || !imgVicePrincipal || !vicePrincipal){
-      toast.info('Please Fill the form completly')
-    }
-    else{
-
-      const reqBody = new FormData()
-
-      reqBody.append("schoolName",schoolDetails.schoolName)
-      reqBody.append("schoolRegNo",schoolDetails.schoolRegNo)
-      reqBody.append("schoolAffliation",schoolDetails.schoolAffliation)
-      reqBody.append("schoolPhoneNo",schoolDetails.schoolPhoneNo)
-      reqBody.append("schoolEmail",schoolDetails.schoolEmail)
-      reqBody.append("schoolLocation",schoolDetails.schoolLocation)
-      reqBody.append("schoolDistrict",schoolDetails.schoolDistrict)
-      reqBody.append("schoolImage",schoolDetails.schoolImage)
-      reqBody.append("schoolWebsite",schoolDetails.schoolWebsite)
-
-      reqBody.append("schoolratio",schoolBasic.totalTeacher)
-      reqBody.append("toatalStudents",schoolBasic.toatalStudents)
-      reqBody.append("termFee",schoolBasic.termFee)
-      reqBody.append("avgFee",schoolBasic.avgFee)
-      reqBody.append("TotalRating",schoolBasic.TotalRating)
-      reqBody.append("avgStudents",schoolBasic.avgStudents)
-      reqBody.append("totalFee",schoolBasic.totalFee)
-      reqBody.append("admissionFee",schoolBasic.admissionFee)
-      reqBody.append("rating",schoolBasic.rating)
-      reqBody.append("vision",vision)
-      reqBody.append("mission",mission)
-      reqBody.append("imgPrincipal",imgPrincipal)
-      reqBody.append("principal",principal)
-      reqBody.append("imgVicePrincipal",imgVicePrincipal)
-      reqBody.append("vicePrincipal",vicePrincipal)
-
-      if(token){
-        let reqHeader={
-          "Content-Type":"multipart/form-data",
-          "Authorization":`Bearer ${token}`
-        }
-        const result = await updateMoreSchoolDetailsApi(reqBody,reqHeader,schoolid)
-        console.log(result);
-       /*  if(result.status == 200){
-          setImageUploads(true)
-          console.log(schoolid);
-        }
-        else{
-          toast.error('Something went wrong')
-        } */ 
-
-      }
-     
-    }
-
-  }
+  
   const  handleNext = ()=>{
     setbasic(true)
     setShow(false)
@@ -253,19 +192,7 @@ function AddSchool() {
     }
    
   },[schoolDetails.schoolImage])
-  useEffect(()=>{
-    
-    if(moreSchoolDetail.imgPrincipal){
-      setPrincipalPreview(URL.createObjectURL(moreSchoolDetail.imgPrincipal))
-    }
-  },[moreSchoolDetail.imgPrincipal])
-  useEffect(()=>{
-    
-    if(moreSchoolDetail.imgVicePrincipal){
-      setVicePrincipalpreview(URL.createObjectURL(moreSchoolDetail.imgVicePrincipal))
-    }
-    console.log(vicePrincipalPreview);
-  },[moreSchoolDetail.imgVicePrincipal])
+  
 
   useEffect(()=>{
     if(sessionStorage.getItem("token")){
@@ -335,66 +262,12 @@ function AddSchool() {
   
       </div>
       <div className='d-flex justify-content-between'>
-          <Button className='btn btn-warning' variant="contained">Cancel</Button>
+          <Button className='btn btn-warning' variant="contained" onClick={handleClose}>Cancel</Button>
           <Button variant="contained" onClick={handleSaveBasic}>Save</Button>
           </div>
   
       </div>}
-      {imageUploads &&<div className=' row d-flex align-items-center justify-content-center  border shadow rounded w-75 p-5 mt-5'>
-      <div className=' row d-flex align-items-center justify-content-center   w-75 px-5 m-3'>
-          <div className='col-md-12  d-flex align-items-center justify-content-center flex-column '>
-                          <TextField
-                           id="outlined-multiline-flexible"
-                          label="Vision"
-                          multiline
-                          maxRows={4}
-                          placeholder='Vision'
-                          className='w-100 mt-5' onChange={(e)=>setMoreSchoolDetails({...moreSchoolDetail,vision:e.target.value})}
-                          />
-              </div>
-              <div className='col-md-12 d-flex align-items-center justify-content-center flex-column '>
-              
-                          <TextField
-                           id="outlined-multiline-flexible"
-                          label="Mission"
-                          multiline
-                          maxRows={4}
-                          placeholder='Mission'
-                          className='w-100 mt-5'
-                          onChange={(e)=>setMoreSchoolDetails({...moreSchoolDetail,mission:e.target.value})}
-                          />
-             
-      
-              </div> 
-               </div>
-               <div className=' row d-flex align-items-center justify-content-center  w-75 px-5  mt-5'>
-          <div className='col-md-6 d-flex align-items-center justify-content-center flex-column '>
-              <label htmlFor="princi">
-                            <input id='princi' type="file" style={{display:'none'}} onChange={(e)=>setMoreSchoolDetails({...moreSchoolDetail,imgPrincipal:e.target.files[0]})} />
-                            <img src={principalPreview?principalPreview:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png'} alt=" no image" className='w-50 ms-5 ' />
-                          </label>
-                          <TextField id="outlined-basic" label="Principal" variant="outlined" className='w-100 mt-3' onChange={(e)=>setMoreSchoolDetails({...moreSchoolDetail,principal:e.target.value})} />
-  
-                        
-              </div>
-              <div className='col-md-6 d-flex align-items-center justify-content-center flex-column '>
-              <label htmlFor="vice" >
-                            <input id='vice' type="file" style={{display:'none'}} onChange={(e)=>setMoreSchoolDetails({...moreSchoolDetail,imgVicePrincipal:e.target.files[0]})} />
-                            <img src={vicePrincipalPreview?vicePrincipalPreview:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png'} alt=" no image" className='w-50 ms-5  ' />
-                          </label>
-                          <TextField id="outlined-basic" label="Vice-Principal" variant="outlined" className='w-100 mt-3' onChange={(e)=>setMoreSchoolDetails({...moreSchoolDetail,vicePrincipal:e.target.value})} />
-  
-             
-      
-              </div> 
-               </div>
-        
-              <div className='d-flex justify-content-between mt-5'>
-          <Button className='btn btn-warning' variant="contained">Cancel</Button>
-          <Button variant="contained" onClick={UpdateMoreData}>Save</Button>
-          <Button className='btn btn-success' variant="contained" onClick={showAddStaff}>Next</Button>
-          </div>
-      </div>}
+    
      
 
     

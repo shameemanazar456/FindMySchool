@@ -4,7 +4,6 @@ import { Button, FormControl, FormHelperText, InputAdornment, OutlinedInput, Sta
 import React, { useEffect } from 'react'
 import SchoolList from '../../components/admincomponents/SchoolList'
 import ArticlesListAdmin from '../../components/admincomponents/ArticlesListAdmin'
-import VideoListAdmin from '../../components/admincomponents/VideoListAdmin'
 import { Link } from 'react-router-dom'
 import AddSchool from './AddSchool'
 import Header from '../../components/Header'

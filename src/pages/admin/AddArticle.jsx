@@ -2,17 +2,11 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, FormControl, FormHelperText, InputAdornment, OutlinedInput, Stack, TextField } from '@mui/material'
 import React, { useEffect } from 'react'
-import SchoolList from '../../components/admincomponents/SchoolList'
-import ArticlesListAdmin from '../../components/admincomponents/ArticlesListAdmin'
-import VideoListAdmin from '../../components/admincomponents/VideoListAdmin'
 import { Link, useNavigate } from 'react-router-dom'
-import AddSchool from './AddSchool'
-import Header from '../../components/Header'
-import AdminHeader from '../../components/AdminHeader'
-import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify'
 import { addArticleAPi } from '../../services/allApi'
+import { Modal } from 'react-bootstrap'
 
 function AddArticle() {
     const [show, setShow] = useState(true);
@@ -81,12 +75,7 @@ function AddArticle() {
         toast.error('Something Went Wrong')
       }
     }
-
-  
     }
-
-
-
   }
   useEffect(()=>{
     if(article.articleImage){

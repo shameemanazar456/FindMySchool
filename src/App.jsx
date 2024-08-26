@@ -14,7 +14,6 @@ import ArticleList from './pages/ArticleList'
 import Article from './pages/Article'
 import AdminHome from './pages/admin/AdminHome'
 import AddSchool from './pages/admin/AddSchool'
-import SchoolBasic from './components/admincomponents/SchoolBasic'
 import AddArticle from './pages/admin/AddArticle'
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
           <Route path='/article/:id' element={<Article/>}></Route>
           <Route path='/home-admin' element={<AdminHome/>}></Route>
           <Route path='/admin-addSchool' element={<AddSchool/>}></Route>
-          <Route path='/admin-editSchool/:id' element={<SchoolBasic/>}></Route>
           <Route path='/add-article' element={<AddArticle/>}></Route>
       </Routes>
      
